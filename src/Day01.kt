@@ -1,17 +1,27 @@
 fun main() {
-    fun part1(input: List<String>): Int {
-        return input.size
+
+    val input = readInput("Day01_input").map { it.toInt() }
+    var lastItem = 103
+    var counter = 0
+
+    for (item in input) {
+        if (item > lastItem) {
+            counter++
+        }
+        lastItem = item
     }
 
-    fun part2(input: List<String>): Int {
-        return input.size
+    println(counter)
+
+    counter = 0
+
+    for (window in input.windowed(3).windowed(2)) {
+        val sumA = window[0].sum()
+        val sumB = window[1].sum()
+
+        if (sumB > sumA) {
+            counter++
+        }
     }
-
-    // test if implementation meets criteria from the description, like:
-    val testInput = readInput("Day01_test")
-    check(part1(testInput) == 1)
-
-    val input = readInput("Day01")
-    println(part1(input))
-    println(part2(input))
+    println(counter)
 }
